@@ -9,7 +9,6 @@ class CreateCategoryController {
         const { name, description } = req.body
     
         this.createCategoryUseCase.execute({name, description})
-        console.log('fdd')
         return res.status(201).send()
 
 
