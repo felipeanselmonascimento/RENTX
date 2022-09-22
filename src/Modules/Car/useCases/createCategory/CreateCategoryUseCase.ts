@@ -1,4 +1,4 @@
-import { CategoriesRepository, ICreateCategoryDTO } from "../../repositories/CategoriesRepository"
+import { CategoriesRepository, ICreateCategoryDTO } from "../../repositories/implementations/CategoriesRepository"
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository"
 
 
@@ -6,9 +6,9 @@ class CreateCategoryUseCase {
 
     constructor(private categoriesRepository: ICategoriesRepository){}
 
-    execute({ name, description }: ICreateCategoryDTO): void {
+    async execute({ name, description }: ICreateCategoryDTO): Promise<void> {
 
-        const nameAlreadyExists = this.categoriesRepository.findByName(name)
+        const nameAlreadyExists = await this.categoriesRepository.findByName(name)
 
         if (nameAlreadyExists) {
             throw new Error('Name already Exists')
